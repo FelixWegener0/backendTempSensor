@@ -15,7 +15,7 @@ public class Functions {
 
     static String url = "jdbc:sqlite:C:/Users/Nutzer/Documents/GitHub/backendTempSensor/src/main/java/com/tempSensor/backend/database/database.db";
 
-    public void writeToDatabase(sensorData data) {
+    public static void writeToDatabase(sensorData data) {
 
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
@@ -31,7 +31,7 @@ public class Functions {
         }
     }
 
-    public dbType latestEntry() {
+    public static dbType latestEntry() {
 
         String sql = "SELECT * FROM date LIMIT 1 ORDER BY date ORDER BY time";
 
@@ -47,7 +47,7 @@ public class Functions {
         }
     }
 
-    public dbType[] getAllEntrys() {
+    public static dbType[] getAllEntrys() {
 
         String sql = "SELECT * FROM data";
 
