@@ -34,7 +34,7 @@ public class Functions {
 
     public static dbType latestEntry() {
 
-        String sql = "SELECT * FROM data LIMIT 1 ORDER BY date ORDER BY time";
+        String sql = "SELECT * FROM data ORDER BY time DECS LIMIT 1";
 
         try (Connection conn = DriverManager.getConnection(url);
                 Statement stmt = conn.createStatement()) {
@@ -58,13 +58,13 @@ public class Functions {
 
             ArrayList<dbType> result = new ArrayList<dbType>();
 
-            do {
+            while (rs.next()) {
                 result.add(new dbType(
                         rs.getString("date"),
                         rs.getString("time"),
                         rs.getFloat("temp"),
                         rs.getFloat("humid")));
-            } while (rs.next());
+            }
 
             return result;
         } catch (SQLException e) {
