@@ -59,11 +59,14 @@ public class Functions {
             ArrayList<dbType> result = new ArrayList<dbType>();
 
             do {
-                result.add(new dbType(rs.getString("date"), rs.getString("time"), rs.getFloat("temp"),
+                result.add(new dbType(
+                        rs.getString("date"),
+                        rs.getString("time"),
+                        rs.getFloat("temp"),
                         rs.getFloat("humid")));
             } while (rs.next());
-            return result;
 
+            return result;
         } catch (SQLException e) {
             throw new RuntimeException(e.toString());
         }
