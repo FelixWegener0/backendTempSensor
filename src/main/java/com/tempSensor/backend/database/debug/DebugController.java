@@ -3,7 +3,7 @@ package com.tempSensor.backend.database.debug;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
-
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -38,6 +38,26 @@ public class DebugController {
             stmt.execute(sql);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    public static int getNumberOfentrys() {
+
+        String sql = "SELECT * FROM data";
+
+        try (Connection conn = DriverManager.getConnection(url);
+                Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(sql);
+
+            int index = 0;
+
+            do {
+                index++;
+            } while (rs.next());
+
+            return index;
+        } catch (SQLException e) {
+            throw new RuntimeException(e.toString());
         }
     }
 

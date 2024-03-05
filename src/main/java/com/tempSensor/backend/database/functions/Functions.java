@@ -3,6 +3,7 @@ package com.tempSensor.backend.database.functions;
 import java.sql.DriverManager;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,7 +48,7 @@ public class Functions {
         }
     }
 
-    public static dbType[] getAllEntrys() {
+    public static ArrayList<dbType> getAllEntrys() {
 
         String sql = "SELECT * FROM data";
 
@@ -55,14 +56,13 @@ public class Functions {
                 Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery(sql);
 
-            int columnCount = rs.getMetaData().getColumnCount();
-            dbType[] result = new dbType[columnCount];
+            ArrayList<dbType> result = new ArrayList<dbType>();
 
-            for (int i = 0; i < columnCount; i++) {
-                result[i] = new dbType(rs.getString("date"), rs.getString("time"), rs.getFloat("temp"),
-                        rs.getFloat("humid"));
-            }
-
+            do {
+                result.add(new dbType(rs.getString("date"), rs.getString("time"), rs.getFloat("temp"),
+                        rs.getFloat("humid")));
+                rs.next();
+            } while (rs.next());
             return result;
 
         } catch (SQLException e) {
