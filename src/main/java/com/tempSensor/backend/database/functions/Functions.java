@@ -21,7 +21,7 @@ public class Functions {
         LocalDate date = LocalDate.now();
         LocalTime time = LocalTime.now();
 
-        String sql = "INSERT INTO date (date, time, temp, humid) VALUES ('" + date + "', '" + time
+        String sql = "INSERT INTO data (date, time, temp, humid) VALUES ('" + date + "', '" + time
                 + "', '" + data.temp() + "', '" + data.humid() + "');";
 
         try (Connection conn = DriverManager.getConnection(url);
@@ -34,7 +34,7 @@ public class Functions {
 
     public static dbType latestEntry() {
 
-        String sql = "SELECT * FROM date LIMIT 1 ORDER BY date ORDER BY time";
+        String sql = "SELECT * FROM data LIMIT 1 ORDER BY date ORDER BY time";
 
         try (Connection conn = DriverManager.getConnection(url);
                 Statement stmt = conn.createStatement()) {
