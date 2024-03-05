@@ -61,7 +61,6 @@ public class Functions {
             do {
                 result.add(new dbType(rs.getString("date"), rs.getString("time"), rs.getFloat("temp"),
                         rs.getFloat("humid")));
-                rs.next();
             } while (rs.next());
             return result;
 
