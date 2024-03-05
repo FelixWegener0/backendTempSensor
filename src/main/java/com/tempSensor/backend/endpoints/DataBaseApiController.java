@@ -20,7 +20,8 @@ public class DataBaseApiController {
         try {
             return Functions.latestEntry();
         } catch (Exception e) {
-            throw new RuntimeException(e.toString());
+            System.out.println("Exception in getLatestEntry: " + e.toString());
+            return null;
         }
     }
 
@@ -29,13 +30,19 @@ public class DataBaseApiController {
         try {
             return Functions.getAllEntrys();
         } catch (Exception e) {
-            throw new RuntimeException(e.toString());
+            System.out.println("Exception in getAllEntrys: " + e.toString());
+            return null;
         }
     }
 
     @GetMapping("/getNumberOfentrys")
     public int getNumberOfentrys() {
-        return DebugController.getNumberOfentrys();
+        try {
+            return DebugController.getNumberOfentrys();
+        } catch (Exception e) {
+            System.out.println("Exception in getNumberOfentrys: " + e.toString());
+            return -1;
+        }
     }
 
     @PostMapping("/postNewDataToDatabase")
@@ -44,6 +51,7 @@ public class DataBaseApiController {
             Functions.writeToDatabase(data);
             return "Success";
         } catch (Exception e) {
+            System.out.println("Exception in postNewDataToDatabase: " + e.toString());
             return "Exceptoion: " + e.toString();
         }
     }
